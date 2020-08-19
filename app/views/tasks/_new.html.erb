@@ -1,0 +1,4 @@
+<%= form_tag tasks_path do %>
+  <%= number_field_tag :number_of_tasks, 1, min: 1 %>
+  <%= submit_tag "Add Tasks" %>
+<% end %>

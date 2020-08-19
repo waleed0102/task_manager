@@ -1,0 +1,21 @@
+<h3>Tasks</h3>
+<% @tasks.each do |task| %>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-10">
+        <div class="progress d-inline-block">
+          <div class="progress-bar" role="progressbar" style= <%= "width:"+(task.no_of_seconds*5).to_s+"%" %> aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <p style="color: black">
+              <%= progress_bar_content task %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <% if task.no_of_seconds == 0 %>
+          <%= link_to "Delete", task_path(task.id), method: :delete %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,49 @@
+<h3>Servers</h3>
+<div>
+  <%= form_for @server, url: servers_path do |f|%>
+    <%= f.text_field :name, required: true, class: "form-text text-muted", placeholder: 'Server Name' %>
+    <%= f.submit "Add Server", class: "btn btn-primary" %>
+  <% end %>
+</div>
+<table class="table">
+  <thead>
+    <th>
+      Name
+    </th>
+    <th>
+      Action
+    </th>
+  </thead>
+  <tbody>
+    <% @servers.each do |server| %>
+      <tr>
+        <td>
+          <%= server.name %>
+        </td>
+        <td>
+          <%= link_to "Delete", server_path(server.id), method: :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div id="tasks-id">
+  <%= render 'tasks/list' %>
+</div>
+<%= render 'tasks/new' %>
+
+
+<script>
+  setInterval(function(){
+    Rails.ajax({
+      url: "/tasks/tick_update",
+      type: "PUT",
+      data: "",
+      success: function(data) {
+        document.getElementById('tasks-id').innerHTML = data.body.innerHTML
+      },
+      error: function(data) {}
+    })
+  }, 1000);
+</script>
